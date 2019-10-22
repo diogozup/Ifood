@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.pandapanda.ifood.R;
 import com.pandapanda.ifood.adapter.AdapterEmpresa;
 import com.pandapanda.ifood.helper.ConfiguracaoFirebase;
+import com.pandapanda.ifood.listener.RecyclerItemClickListener;
 import com.pandapanda.ifood.model.Empresa;
 
 import java.util.ArrayList;
@@ -90,7 +93,39 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // Configurar evento de clique nas empresas para mostrar produtos
+        recyclerEmpresa.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerEmpresa, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Empresa empresaSelecionada = empresas.get(position);
+                Intent i = new Intent(HomeActivity.this, MenuActivity.class);
+
+                i.putExtra("empresa", empresaSelecionada);
+
+                startActivity(i);
+
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        }));
+
+
     }
+
+
+
+
+
+
 
 
     private void pesquisarEmpresas(String pesquisa){

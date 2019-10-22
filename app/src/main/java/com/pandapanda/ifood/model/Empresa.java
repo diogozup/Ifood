@@ -3,11 +3,10 @@ package com.pandapanda.ifood.model;
 import com.google.firebase.database.DatabaseReference;
 import com.pandapanda.ifood.helper.ConfiguracaoFirebase;
 
+import java.io.Serializable;
 
 
-
-
-public class Empresa {
+public class Empresa implements Serializable {
     private String idUtilizador;
     private String urlImagem;
     private String nome;
@@ -18,7 +17,7 @@ public class Empresa {
     private String nome_filtro;
 
 
-    public Empresa() {
+    public Empresa(){
     }
 
     public void gravar(){
