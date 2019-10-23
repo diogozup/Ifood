@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activity.ConfiguracoesUtilizador"
+            android:name=".activity.ConfiguracoesUtilizadorActivity"
             android:parentActivityName=".activity.HomeActivity"></activity>
 
         <activity

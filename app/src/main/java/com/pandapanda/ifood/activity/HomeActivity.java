@@ -244,7 +244,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void abrirConfiguracoes(){
-        startActivity(new Intent(HomeActivity.this, ConfiguracoesUtilizador.class));
+        startActivity(new Intent(HomeActivity.this, ConfiguracoesUtilizadorActivity.class));
     }
 
 

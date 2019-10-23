@@ -32,7 +32,7 @@
             app:civ_border_width="1dp" />
 
         <EditText
-            android:id="@+id/editEmpresaNome"
+            android:id="@+id/editUtilizadorNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edit_text"
@@ -42,7 +42,7 @@
             android:padding="16dp" />
 
         <EditText
-            android:id="@+id/editEmpresaCategoria"
+            android:id="@+id/editUtilizadorEndereco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edit_text"
@@ -75,7 +75,7 @@
             android:paddingTop="-2dp" />
 
         <Button
-            android:id="@+id/buttaoGravar"
+            android:id="@+id/buttaoGravar_DadosUtilizador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="validarDadosEmpresa"
