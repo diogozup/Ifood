@@ -1,10 +1,14 @@
 package com.pandapanda.ifood.activity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,9 +26,11 @@ import com.pandapanda.ifood.R;
 import com.pandapanda.ifood.adapter.AdapterProduto;
 import com.pandapanda.ifood.helper.ConfiguracaoFirebase;
 import com.pandapanda.ifood.helper.UtilizadorFirebase;
+import com.pandapanda.ifood.listener.RecyclerItemClickListener;
 import com.pandapanda.ifood.model.Empresa;
 import com.pandapanda.ifood.model.Produto;
 import com.pandapanda.ifood.model.Utilizador;
+import com.pandapanda.ifood.model.ItemPedido;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -48,6 +54,7 @@ public class MenuActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private String idUtilizadorLogado;
     private Utilizador utilizador;
+    private List<ItemPedido> itensCarrinho = new ArrayList<>();
 
 
 
@@ -88,12 +95,30 @@ public class MenuActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        /*-- Configura recyclerview --*/
+        /*--------------------------- Configura recyclerview ----------------------------*/
         recyclerProdutosMenu.setLayoutManager(new LinearLayoutManager(this));
         recyclerProdutosMenu.setHasFixedSize(true);
-
         adapterProduto = new AdapterProduto(produtos, this);
         recyclerProdutosMenu.setAdapter(adapterProduto);
+
+        // Configurar evento de clique
+        recyclerProdutosMenu.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerProdutosMenu, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                confirmarQuantidade(position);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        }));
+
 
         // RECUPERA DADOS DOS PRODUTOS DA EMPRESA
         recuperarProdutos();
@@ -200,6 +225,50 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
+    private void confirmarQuantidade(final int posicao){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Quantidade");
+        builder.setMessage("Insira quantidade");
+
+        final EditText editQuantidade = new EditText(this);
+        editQuantidade.setText("1");
+
+        builder.setView(editQuantidade);
+
+
+
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String quantidade = editQuantidade.getText().toString();
+
+                Produto produtoSelecionado = produtos.get(posicao);
+                ItemPedido itemPedido = new ItemPedido();
+                itemPedido.setIdProduto(produtoSelecionado.getIdProduto());
+                itemPedido.setNomeProduto(produtoSelecionado.getNome());
+                itemPedido.setPreco(produtoSelecionado.getPreco());
+                itemPedido.setQuantidade( Integer.parseInt(quantidade) );
+
+                itensCarrinho.add(itemPedido);
+                // para nao haver pedidos repetidos teria que:
+                //1- Adicionar uma verificacao onde percorre todos os items do carrinho e assinala se existe ja um id desse produto
+                //   ja existente. Se ja tem apenas incrementa quantidade.
+                //2- Verifica se tem quantidade 0. nao pode ter ZERO.
+
+
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
 
 
 
