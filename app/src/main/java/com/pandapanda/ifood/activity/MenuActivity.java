@@ -64,6 +64,8 @@ public class MenuActivity extends AppCompatActivity {
 
     private TextView textCarrinhoQtd, textCarrinhoTotal;
 
+    private int metodoDePagamento;
+
 
 
 
@@ -272,7 +274,7 @@ public class MenuActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.menuPedido:
-                //metodo confirmar pedido
+                confirmarPedido();
 
                 break;
         }
@@ -338,7 +340,68 @@ public class MenuActivity extends AppCompatActivity {
 
 
 
+    private void confirmarPedido(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Selecione um metodo de pagamento");
 
+
+        // Para passar ao sitSingleChoiceItems um array de strings, poderia ir a  "res > values > strings " e la dentro criar um xml com as strings
+        // mas neste caso para ser mais rapido irei criar aqui um Array de strings e passar por aqui diretamente um CharSequence
+        CharSequence[] itens = new CharSequence[]{
+                "Dinheiro" , "MultiBanco"
+        };
+
+        builder.setSingleChoiceItems(itens, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                metodoDePagamento = which;
+            }
+        });
+
+        final EditText editObservacao = new EditText(this);
+        editObservacao.setHint("Insira uma observacao");
+        builder.setView(editObservacao);
+
+
+
+
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String observacao = editObservacao.getText().toString();
+                pedidoRecuperado.setMetodoPagamento(metodoDePagamento);
+                pedidoRecuperado.setObservacao(observacao);
+                pedidoRecuperado.setStatus("confirmado");
+
+                pedidoRecuperado.confirmar(); // vamos criar agora este metodo dentro de modelo "Pedido" que é de estrutura identica ao "gravar()" porem
+                                              //   iremos criar um no diferente. iremos criar "pedido" e depois "idEmpresa" e de seguida "idPedido"
+                //posso tbm criar um novo nó de "meus_pedidos" onde armazenava todos os pedidos qe fiz .  talvez precisasse novo modelo.. duno.. tenho q ver..etc..
+                //vou simplesmente remover o nó temporario de "pedido" e siga... depois se tive tempo, fazer esta parte! <<<
+                pedidoRecuperado.remover();
+                pedidoRecuperado = null ; //reiniciar
+
+            }
+        });
+
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+
+
+
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+    }
 
 
 
