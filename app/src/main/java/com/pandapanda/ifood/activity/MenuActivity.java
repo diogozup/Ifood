@@ -28,9 +28,10 @@ import com.pandapanda.ifood.helper.ConfiguracaoFirebase;
 import com.pandapanda.ifood.helper.UtilizadorFirebase;
 import com.pandapanda.ifood.listener.RecyclerItemClickListener;
 import com.pandapanda.ifood.model.Empresa;
+import com.pandapanda.ifood.model.ItemPedido;
+import com.pandapanda.ifood.model.Pedido;
 import com.pandapanda.ifood.model.Produto;
 import com.pandapanda.ifood.model.Utilizador;
-import com.pandapanda.ifood.model.ItemPedido;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -55,6 +56,8 @@ public class MenuActivity extends AppCompatActivity {
     private String idUtilizadorLogado;
     private Utilizador utilizador;
     private List<ItemPedido> itensCarrinho = new ArrayList<>();
+
+    private Pedido pedidoRecuperado;
 
 
 
@@ -254,6 +257,16 @@ public class MenuActivity extends AppCompatActivity {
                 //1- Adicionar uma verificacao onde percorre todos os items do carrinho e assinala se existe ja um id desse produto
                 //   ja existente. Se ja tem apenas incrementa quantidade.
                 //2- Verifica se tem quantidade 0. nao pode ter ZERO.
+
+                if(pedidoRecuperado == null ){
+                    pedidoRecuperado = new Pedido(idUtilizadorLogado,idEmpresaSelecionada);
+                }
+
+                pedidoRecuperado.setNome(utilizador.getNome());
+                pedidoRecuperado.setEndereco(utilizador.getEndereco());
+                pedidoRecuperado.setItens(itensCarrinho);
+                pedidoRecuperado.gravar();
+
 
 
             }
