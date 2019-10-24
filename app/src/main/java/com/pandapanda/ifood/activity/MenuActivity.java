@@ -34,6 +34,7 @@ import com.pandapanda.ifood.model.Produto;
 import com.pandapanda.ifood.model.Utilizador;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,10 @@ public class MenuActivity extends AppCompatActivity {
     private List<ItemPedido> itensCarrinho = new ArrayList<>();
 
     private Pedido pedidoRecuperado;
+    private int qtdItensCarrinho;
+    private Double totalCarrinho;
+
+    private TextView textCarrinhoQtd, textCarrinhoTotal;
 
 
 
@@ -72,6 +77,8 @@ public class MenuActivity extends AppCompatActivity {
         inicializarComponentes();
         firebaseRef = ConfiguracaoFirebase.getFirebase();
         idUtilizadorLogado = UtilizadorFirebase.getIdUtilizador();
+
+
 
 
         //GET empresa selecionada
@@ -138,11 +145,57 @@ public class MenuActivity extends AppCompatActivity {
         recyclerProdutosMenu = findViewById(R.id.recyclerProdutoMenu);
         imageEmpresaMenu = findViewById(R.id.imageEmpresaMenu);
         textNomeEmpresaMenu = findViewById(R.id.textNomeEmpresaMenu);
+
+
+        textCarrinhoQtd = findViewById(R.id.textCarrinhoQtd);
+        textCarrinhoTotal = findViewById(R.id.textCarrinhoTotal);
     }
 
 
     private void recuperarPedido(){
-        dialog.dismiss();
+
+        final DatabaseReference pedidoRef = firebaseRef
+                .child("pedidos_utilizador")
+                .child(idEmpresaSelecionada)
+                .child(idUtilizadorLogado);
+
+        pedidoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                qtdItensCarrinho = 0;
+                totalCarrinho = 0.0;
+                itensCarrinho = new ArrayList<>();
+
+
+
+                if(dataSnapshot.getValue() != null){
+                    pedidoRecuperado = dataSnapshot.getValue(Pedido.class);
+                    itensCarrinho = pedidoRecuperado.getItens();
+
+                    for(ItemPedido itemPedido: itensCarrinho){
+                        int qtde = itemPedido.getQuantidade();
+                        Double preco = itemPedido.getPreco();
+
+                        totalCarrinho += (qtde * preco);
+                        qtdItensCarrinho += qtde;
+                    }
+                }
+                // para formatar o total
+                DecimalFormat df = new DecimalFormat("0.00");
+
+                textCarrinhoQtd.setText("qtd: " + String.valueOf(qtdItensCarrinho) );
+                textCarrinhoTotal.setText("€ur: " + df.format(totalCarrinho));
+
+                dialog.dismiss(); // nao fazer o dialog (loading animation) dont show
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
