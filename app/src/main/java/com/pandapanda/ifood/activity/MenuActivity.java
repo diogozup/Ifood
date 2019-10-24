@@ -144,7 +144,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
     private void inicializarComponentes(){
-        recyclerProdutosMenu = findViewById(R.id.recyclerProdutoMenu);
+        recyclerProdutosMenu = findViewById(R.id.recyclerPedidos);
         imageEmpresaMenu = findViewById(R.id.imageEmpresaMenu);
         textNomeEmpresaMenu = findViewById(R.id.textNomeEmpresaMenu);
 

@@ -9,15 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.PedidosActivity"
+            android:parentActivityName=".activity.EmpresaActivity" />
 
         <activity
             android:name=".activity.ConfiguracoesUtilizadorActivity"
-            android:parentActivityName=".activity.HomeActivity"></activity>
-
+            android:parentActivityName=".activity.HomeActivity" />
         <activity
             android:name=".activity.MenuActivity"
-            android:parentActivityName=".activity.HomeActivity"></activity>
-
+            android:parentActivityName=".activity.HomeActivity" />
         <activity
             android:name=".activity.ConfiguracoesEmpresaActivity"
             android:parentActivityName=".activity.EmpresaActivity" />
