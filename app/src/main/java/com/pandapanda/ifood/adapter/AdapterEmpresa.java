@@ -41,7 +41,7 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.MyViewHo
         holder.nomeEmpresa.setText(empresa.getNome());
         holder.categoria.setText(empresa.getCategoria() + " - ");
         holder.tempo.setText(empresa.getTempo() + " Min");
-        holder.entrega.setText("R$ " + empresa.getPrecoEntrega().toString());
+        holder.entrega.setText("€ur " + empresa.getPrecoEntrega().toString());
 
         //Carregar imagem
         String urlImagem = empresa.getUrlImagem();

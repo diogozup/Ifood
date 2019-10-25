@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF3333</color>
-    <color name="colorPrimaryDark">#990000</color>
-    <color name="colorAccent">#FF6666</color>
-    <color name="vermelhoEscuro">#660000</color>
-    <color name="controlHighlight">#ff404e</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#D84315</color>
+    <color name="colorAccent">#EF6C00</color>
+    <color name="vermelhoEscuro">#F9A825</color>
+    <color name="controlHighlight">#221818</color>
 
 
 
