@@ -160,6 +160,9 @@ public class EmpresaActivity extends AppCompatActivity {
             case R.id.menuNovoProduto:
                 abrirNovoProduto();
                 break;
+            case R.id.menuPedidos:
+                abrirPedidos();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -168,7 +171,7 @@ public class EmpresaActivity extends AppCompatActivity {
 
     //---------------------------------------------------------------------
     //---------------------------------------------------------------------
-    //-------------------  METODOS AUXILIXARES ----------------------------
+    //-------------------  PARA ONDE NOS LEVAM OS BOTOES ------------------
     //---------------------------------------------------------------------
     //---------------------------------------------------------------------
     //---------------------------------------------------------------------
@@ -191,6 +194,9 @@ public class EmpresaActivity extends AppCompatActivity {
         startActivity(new Intent(EmpresaActivity.this, NovoProdutoEmpresaActivity.class));
     }
 
+    private void abrirPedidos(){
+        startActivity(new Intent(EmpresaActivity.this, PedidosActivity.class));
+    }
 
 
 

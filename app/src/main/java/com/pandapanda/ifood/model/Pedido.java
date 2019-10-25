@@ -3,6 +3,7 @@ package com.pandapanda.ifood.model;
 import com.google.firebase.database.DatabaseReference;
 import com.pandapanda.ifood.helper.ConfiguracaoFirebase;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Pedido {
@@ -17,8 +18,6 @@ public class Pedido {
     private int metodoPagamento;
     private String observacao;
 
-    public Pedido() {
-    }
 
     public Pedido(String idUti, String idEmp){
         setIdEmpresa(idEmp);
@@ -148,6 +147,19 @@ public class Pedido {
         pedidoRef.removeValue();
     }
 
+    public void atualizarStatus(){
+        //instanciamos um HashMap para mudar apenas 1 parametro child de pedido
+        HashMap<String,Object> status = new HashMap<>();
+        status.put("status", getStatus());
+
+
+        DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
+        DatabaseReference pedidoRef = firebaseRef
+                .child("pedidos")
+                .child(getIdEmpresa() )
+                .child(getIdPedido()  );
+        pedidoRef.updateChildren( status );
+    }
 
 
 }
