@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -86,6 +87,7 @@ public class PedidosActivity extends AppCompatActivity {
                                 Pedido pedido = pedidos.get(position);
                                 pedido.setStatus("finalizado");
                                 pedido.atualizarStatus(); // vou criar este metodo no moedlo Pedido
+                                exibirMensagem("Encomenda finalizada com sucesso!");
 
 
                             }
@@ -150,7 +152,10 @@ public class PedidosActivity extends AppCompatActivity {
     }
 
 
-
+    private void exibirMensagem(String texto){
+        Toast.makeText(this, texto,Toast.LENGTH_SHORT)
+                .show();
+    }
 
 
 
