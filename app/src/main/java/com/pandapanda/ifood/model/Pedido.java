@@ -6,6 +6,10 @@ import com.pandapanda.ifood.helper.ConfiguracaoFirebase;
 import java.util.HashMap;
 import java.util.List;
 
+
+
+
+
 public class Pedido {
     private String idUtilizador;
     private String idEmpresa;
@@ -18,6 +22,9 @@ public class Pedido {
     private int metodoPagamento;
     private String observacao;
 
+
+    public Pedido() {
+    }
 
     public Pedido(String idUti, String idEmp){
         setIdEmpresa(idEmp);

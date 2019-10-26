@@ -114,7 +114,7 @@ public class PedidosActivity extends AppCompatActivity {
         dialog = new SpotsDialog.Builder()
                 .setContext(this)
                 .setMessage("Carregando dados")
-                .setCancelable(false)
+                .setCancelable(true)
                 .build();
         dialog.show();
 
