@@ -1,8 +1,5 @@
 package com.pandapanda.ifood.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +9,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +33,8 @@ public class AuthenticationActivity extends AppCompatActivity {
     private LinearLayout linearTipoUtilizador;
 
     private FirebaseAuth autenticacao;
+
+    private Button botaoAbout;
 
 
     @Override//------------------------------------------------ Metodo OnCreate Autenticacao
@@ -136,6 +138,14 @@ public class AuthenticationActivity extends AppCompatActivity {
         });
 
 
+        botaoAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirTelaAbout();
+
+            }
+        });
+
     }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------
@@ -167,6 +177,10 @@ public class AuthenticationActivity extends AppCompatActivity {
         }
     }
 
+    private void abrirTelaAbout(){
+        startActivity(new Intent(getApplicationContext(),AboutActivity.class));
+    }
+
     private void iniciarComponentes(){
         campoEmail = findViewById(R.id.editCadastroEmail);
         campoPassword = findViewById(R.id.editCadastroSenha);
@@ -175,6 +189,9 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         tipoUtilizador = findViewById(R.id.switchTipoUtilizador);
         linearTipoUtilizador = findViewById(R.id.linearTipoUtilizador);
+
+        botaoAbout = findViewById(R.id.buttonAbout);
+
 
     }
 
