@@ -57,7 +57,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             android:layout_weight="0"
-            android:background="#7FFC0000"
+            android:background="#EF6C00"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -68,7 +68,7 @@
                 android:layout_weight="0"
                 android:padding="8dp"
                 android:text="Ver Carrinho"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textColorHint="#00F7EFEF" />
 
             <TextView
@@ -78,7 +78,7 @@
                 android:layout_weight="0"
                 android:padding="8dp"
                 android:text="Qtd: 00"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/textCarrinhoTotal"
@@ -87,7 +87,7 @@
                 android:layout_weight="0"
                 android:padding="8dp"
                 android:text="€ur 00"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
