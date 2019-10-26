@@ -32,8 +32,8 @@
 
     <ImageView
         android:id="@+id/ballon"
-        android:layout_width="241dp"
-        android:layout_height="313dp"
+        android:layout_width="193dp"
+        android:layout_height="204dp"
         android:layout_marginStart="69dp"
         android:layout_marginLeft="69dp"
         android:layout_marginTop="74dp"
@@ -49,8 +49,8 @@
 
     <Button
         android:id="@+id/sub"
-        android:layout_width="253dp"
-        android:layout_height="60dp"
+        android:layout_width="257dp"
+        android:layout_height="75dp"
         android:layout_marginStart="62dp"
         android:layout_marginLeft="62dp"
         android:layout_marginEnd="62dp"
