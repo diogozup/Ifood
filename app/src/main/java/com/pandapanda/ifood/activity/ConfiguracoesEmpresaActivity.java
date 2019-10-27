@@ -202,7 +202,7 @@ public class ConfiguracoesEmpresaActivity extends AppCompatActivity {
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                                 @Override
                                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                    urlImagemSelecionada = taskSnapshot.getDownloadUrl().toString();
+                                                    urlImagemSelecionada = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
                                                     Toast.makeText(ConfiguracoesEmpresaActivity.this,
                                                             "Sucesso ao fazer upload da imagem",
                                                             Toast.LENGTH_SHORT).show();
