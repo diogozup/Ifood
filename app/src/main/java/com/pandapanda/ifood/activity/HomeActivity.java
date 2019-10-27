@@ -194,6 +194,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+
+
+
+
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -204,6 +210,10 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.menuConfiguracoes:
                 abrirConfiguracoes();
                 break;
+            case R.id.menuSubscricoes:
+                abrirSubscricoes();
+                break;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -247,7 +257,9 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(new Intent(HomeActivity.this, ConfiguracoesUtilizadorActivity.class));
     }
 
-
+    private void abrirSubscricoes(){
+        startActivity(new Intent(HomeActivity.this, SubscricoesActivity.class));
+    }
 
 
 

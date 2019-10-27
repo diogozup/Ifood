@@ -11,6 +11,11 @@
         android:icon="@drawable/ic_search_black_24dp"
         app:showAsAction="always" />
     <item
+        android:id="@+id/menuSubscricoes"
+        android:title="Novo Produto"
+        android:icon="@drawable/ic_notifications_active_black_24dp"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/menuConfiguracoes"
         android:title="Configuraçoes"
         app:showAsAction="never" />
