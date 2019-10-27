@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.pandapanda.ifood.R;
 import com.pandapanda.ifood.helper.ConfiguracaoFirebase;
 import com.pandapanda.ifood.helper.UtilizadorFirebase;
@@ -42,6 +43,10 @@ public class AuthenticationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_autenticacao);
         //getSupportActionBar().hide();
+
+        // receber apenas notificacoes do topico "Pizza"
+        FirebaseMessaging.getInstance().subscribeToTopic("Pizza");
+
 
         iniciarComponentes();
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
