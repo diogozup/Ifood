@@ -51,6 +51,44 @@
             android:text="Gravar"
             android:theme="@style/botaoPadrao" />
 
+        <TextView
+            android:id="@+id/textView_Morada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Morada Utilizador" />
+
+        <TextView
+            android:id="@+id/textView_Address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Address" />
+
+        <TextView
+            android:id="@+id/textView_Area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Area" />
+
+        <TextView
+            android:id="@+id/textView_City"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="City" />
+
+        <TextView
+            android:id="@+id/textView_Country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Country" />
+
+        <TextView
+            android:id="@+id/textView_PostalCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PostalCode" />
+
 
     </LinearLayout>
 
