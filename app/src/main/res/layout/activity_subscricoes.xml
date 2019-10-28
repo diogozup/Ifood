@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0" />
 
+
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
@@ -27,6 +28,48 @@
         android:text="Subscricoes" />
 
 
+    <CheckBox
+        android:id="@+id/opcao1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pizza Hut"
+        android:onClick="selectItem"
+        />
+
+    <CheckBox
+        android:id="@+id/opcao2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mc Donalds"
+        android:onClick="selectItem"
+        />
+
+    <CheckBox
+        android:id="@+id/opcao3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Taberna Belga"
+        android:onClick="selectItem"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subscrever"
+        android:layout_gravity="center_horizontal"
+        android:onClick="finalSelection"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/final_result"
+        android:text="Hello world!!"
+        />
+
+
+<!--    android:onClick="selectItem" -->
+
+    <!--
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
@@ -56,6 +99,8 @@
 
     </RadioGroup>
 
+-->
+
     <!--
     <TextView
         android:id="@+id/text_view_selected"
@@ -74,11 +119,5 @@
         android:gravity="center"
         android:text="Apply" />
      -->
-
-
-
-
-
-
 
 </LinearLayout>

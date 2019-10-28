@@ -1,8 +1,10 @@
 package com.pandapanda.ifood.activity;
 
 import android.os.Bundle;
-import android.widget.RadioGroup;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,19 +12,21 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.pandapanda.ifood.R;
 
-public class SubscricoesActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class SubscricoesActivity extends AppCompatActivity {
+    /*
     RadioGroup radioGroup;
     int checked;
-
-
+    */
     /*
     RadioGroup radioGroup;
     RadioButton radioButton;
     TextView textView;
     */
 
-
+    ArrayList<String> selection = new ArrayList<String>();
+    TextView final_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,11 @@ public class SubscricoesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // ter voltao voltar
 
+        final_text = findViewById(R.id.final_result);
+        final_text.setEnabled(false);
 
+
+        /*
         radioGroup = findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -68,15 +76,7 @@ public class SubscricoesActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
-
-
-
-
-
+        */
         /*
         radioGroup = findViewById(R.id.radioGroup);
         textView = findViewById(R.id.text_view_selected);
@@ -101,9 +101,6 @@ public class SubscricoesActivity extends AppCompatActivity {
         });
         */
    }
-
-
-
         /*
     public void checkButton(View v ){
         int radioId = radioGroup.getCheckedRadioButtonId();
@@ -114,6 +111,61 @@ public class SubscricoesActivity extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
     }
     */
+
+    public void selectItem(View view){
+        boolean checked = ((CheckBox) view).isChecked();
+
+        switch(view.getId()){
+            case R.id.opcao1:
+                if(checked){
+                    selection.add("Pizza Hut");
+                    FirebaseMessaging.getInstance().subscribeToTopic("PIZZAHUT");
+                }else{
+                    selection.remove("Pizza Hut");
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic("PIZZAHUT");
+                }
+                break;
+            case R.id.opcao2:
+                if(checked){
+                    selection.add("Mc Donalds");
+                    FirebaseMessaging.getInstance().subscribeToTopic("MCDONALD");
+                }else{
+                    selection.remove("Mc Donalds");
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic("MCDONALD");
+
+                }
+                break;
+            case R.id.opcao3:
+                if(checked){
+                    selection.add("Taberna Belga");
+                    FirebaseMessaging.getInstance().subscribeToTopic("TABERNABELGA");
+
+                }else{
+                    selection.remove("Taberna Belga");
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic("TABERNABELGA");
+
+                }
+                break;
+        }
+    }
+
+    public void finalSelection(View view){
+
+        String final_selection = "";
+        for(String Selections : selection){
+            final_selection = final_selection + Selections + "\n" ;
+        }
+        final_text.setText(final_selection);
+        final_text.setEnabled(true);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
 
 
 }
