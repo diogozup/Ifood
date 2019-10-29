@@ -25,8 +25,10 @@ import androidx.core.app.ActivityCompat;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -73,9 +75,8 @@ public class ConfiguracoesUtilizadorActivity extends AppCompatActivity implement
     private ArrayList<String> permissions = new ArrayList<>();
     // integer for permission results request
     private static final int ALL_PERMISSIONS_RESULT = 1011;
-
-
-
+    //--------------------------------------------------    gps update
+    private FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +102,8 @@ public class ConfiguracoesUtilizadorActivity extends AppCompatActivity implement
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).build();
 
+        //------------------------------------------------------------- GPS update
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         //-------------------------------------------------------------------------------------------------------------------------------------- GPS.over
 
@@ -314,8 +317,20 @@ public class ConfiguracoesUtilizadorActivity extends AppCompatActivity implement
                 ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             Toast.makeText(this, "Precisa de ceder as permissoes de localizacao GPS!",Toast.LENGTH_SHORT).show();
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,locationRequest, (com.google.android.gms.location.LocationListener) this);
+        //LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,locationRequest, (com.google.android.gms.location.LocationListener) this);
 
+        //------------------------------------------------------------------------------- GPS tryout start
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                        }
+                    }
+                });
+        //------------------------------------------------------------------------------- gps tryout over
 
     }
 
