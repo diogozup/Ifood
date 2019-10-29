@@ -49,5 +49,8 @@ dependencies {
     /* Dependencia dialog de progresso (tipo loading )*/
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
 
+    /* Dependencia para Get User GPS location*/
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+
 }
 apply plugin: 'com.google.gms.google-services'

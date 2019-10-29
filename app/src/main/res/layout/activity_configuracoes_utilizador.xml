@@ -89,6 +89,22 @@
             android:layout_height="wrap_content"
             android:text="PostalCode" />
 
+        <TextView
+            android:id="@+id/textView-_currentLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Coordenadas pelo GPS"
+            android:textColor="#D84315"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="coordenadas do atribuidas pelo GPS" />
+
 
     </LinearLayout>
 
