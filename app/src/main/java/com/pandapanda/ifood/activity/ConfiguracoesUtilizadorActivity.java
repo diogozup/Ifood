@@ -57,12 +57,12 @@ public class ConfiguracoesUtilizadorActivity extends AppCompatActivity implement
     Geocoder geocoder;
     List<Address> addresses;
 
-    //ESTG coordenadas
-    //41.367147, -8.194802
-    Double latitude = 41.367147;
-    Double longitude = -8.194802;
+    //ESTG coordenadas: 41.367147, -8.194802
+    //TOURAL GUIMARAES: 41.450795, -8.288537
+    Double latitude = 41.450795;                      // -------- isto sem valor inicial pode dar problemas
+    Double longitude = -8.288537;                     // -------- isto sem valor inicial pode dar problemas
 
-    //---- GPS
+    //---------------------------------------------------------------------------------------------------------------------------------------- GPS
     private Location location;
     private TextView locationTv;
     private GoogleApiClient googleApiClient;
@@ -77,7 +77,12 @@ public class ConfiguracoesUtilizadorActivity extends AppCompatActivity implement
     private static final int ALL_PERMISSIONS_RESULT = 1011;
     //--------------------------------------------------    gps update
     private FusedLocationProviderClient fusedLocationClient;
+    //-- testing
+    private TextView latitude_string ;
+    private TextView longitude_string ;
 
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ON CREATE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +136,6 @@ public class ConfiguracoesUtilizadorActivity extends AppCompatActivity implement
         textView_Country = findViewById(R.id.textView_Country);
         textView_PostalCode = findViewById(R.id.textView_PostalCode);
 
-        //-------------------------------------------------------------------------- GPS get user location
 
 
 
@@ -215,6 +219,10 @@ public class ConfiguracoesUtilizadorActivity extends AppCompatActivity implement
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, (com.google.android.gms.location.LocationListener) this); //---- AQUI POSSIVEL ERROR
             googleApiClient.disconnect();
         }
+
+
+
+
     }
 
     public boolean checkPlayServices(){
@@ -235,7 +243,45 @@ public class ConfiguracoesUtilizadorActivity extends AppCompatActivity implement
     @Override
     public void onLocationChanged(Location location) {
         if(location != null){
-            locationTv.setText("Latitude: " + location.getLatitude() + "\nLongitude: "+ location.getLatitude());
+            locationTv.setText("Latitude: " + location.getLatitude() + "\nLongitude: "+ location.getLongitude());
+//            latitude = location.getLatitude();
+//            longitude = location.getLongitude();
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //                                                                                          E AQUI QUE DOU O VALOR DAS MINHAS COORDENADAS
+            //-------------------------------------------------------------------------------------------------------------------------------------------- ToDo:
+            //-------------------------------------------------------------------------------------------------------------------------------------------- 1- GeoCode relancar
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //-------------------------------------------------------------------------------------------------------------------------------------------- 2- Butao user isto tudo
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+            // 1- RELANCAR AQUI O GEO CODER COM AS COORDENADAS UPDATED
+            // 2- CRIAR BOTAO PARA ESTA OPCAO SER LANCADA
+
+
+
+
+
+
+
+
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------
+
         }
 
     }
@@ -302,14 +348,51 @@ public class ConfiguracoesUtilizadorActivity extends AppCompatActivity implement
         location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
         if(location != null){
-            locationTv.setText("Latitude: " + location.getLatitude() + "\nLongitude: "+ location.getLatitude());
+            locationTv.setText("Latitude: " + location.getLatitude() + "\nLongitude: "+ location.getLongitude());
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+
+            geocoder = new Geocoder(this, Locale.getDefault());
+            try {
+                addresses = geocoder.getFromLocation(latitude,longitude,1);
+                String address = addresses.get(0).getAddressLine(0);
+                String area = addresses.get(0).getLocality();
+                String city = addresses.get(0).getAdminArea();
+                String country = addresses.get(0).getCountryName();
+                String postalcode = addresses.get(0).getPostalCode();
+
+                String fullAddress = address+", "+area+", "+city+", "+country+", "+postalcode;
+                textView.setText(fullAddress);
+
+                textView_Address.setText(address);
+                textView_Area.setText(area);
+                textView_City.setText(city);
+                textView_Country.setText(country);
+                textView_PostalCode.setText(postalcode);
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //latitude_string.setText("A LATITUDE E "+location.getLatitude());
+           // Toast.makeText(this, "ENTROU AQUI",Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, latitude.toString(),Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, latitude.toString(),Toast.LENGTH_SHORT).show();
+
+            latitude = location.getLatitude();
+        //    longitude = location.getLongitude();
+            Toast.makeText(this, latitude.toString(),Toast.LENGTH_SHORT).show();
+
+
         }
         startLocationUpdates();
     }
 
     private void startLocationUpdates(){
         locationRequest = new LocationRequest();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         locationRequest.setInterval(UPDATE_INTERVAL);
         locationRequest.setFastestInterval(FASTEST_INTERVAL);
 
@@ -331,6 +414,7 @@ public class ConfiguracoesUtilizadorActivity extends AppCompatActivity implement
                     }
                 });
         //------------------------------------------------------------------------------- gps tryout over
+
 
     }
 
